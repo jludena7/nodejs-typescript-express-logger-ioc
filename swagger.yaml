@@ -1,0 +1,282 @@
+openapi: 3.0.3
+info:
+  title: Skeleton Express + Inversify + Typescript, Mysql, Logger
+  description: |-
+    Skeleton has everything you need to quickly start developing an API
+  version: 1.0.0
+servers:
+  - url: http://localhost:8002/v1
+tags:
+  - name: User
+    description: User collection endpoints
+  - name: Product
+    description: Product collection endpoints
+paths:
+  /product:
+    post:
+      summary: Create product
+      description: Endpoint to create new product
+      tags:
+        - Product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateProductRequest"
+        required: true
+        description: Payload for create new product
+      responses:
+        "201":
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUpdateDeleteProductResponse'
+        "400":
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonError400'
+  /user:
+    post:
+      summary: Create user
+      description: Endpoint to create new user
+      tags:
+        - User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUserRequest"
+        required: true
+        description: Payload for create new user
+      responses:
+        "201":
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUpdateDeleteUserResponse'
+        "400":
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonError400'
+    get:
+      summary: List user
+      description: Endpoint to lis users
+      tags:
+        - User
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: number
+          description: Limit for pagination
+        - in: query
+          name: before
+          schema:
+            type: number
+          description: Before for pagination (in this case is user id)
+        - in: query
+          name: after
+          schema:
+            type: number
+          description: After for pagination (in this case is user id)
+      responses:
+        "200":
+          description: Success response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/GetUserResponse'
+        "400":
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonError400'
+
+  /user/:id:
+    get:
+      summary: Get user
+      description: Endpoint to retrieve user by id
+      tags:
+        - User
+      parameters:
+        - name: id
+          in: path
+          description: Parameter to get user by id
+          required: true
+          schema:
+            type: number
+      responses:
+        "200":
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserResponse'
+        "400":
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonError400'
+    patch:
+      summary: Update user
+      description: Endpoint to update user by id
+      tags:
+        - User
+      parameters:
+        - name: id
+          in: path
+          description: Parameter to find and update user by id
+          required: true
+          schema:
+            type: number
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserRequest"
+        required: true
+        description: Payload for update user
+      responses:
+        "200":
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUpdateDeleteUserResponse'
+        "400":
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonError400'
+    delete:
+      summary: Delete user
+      description: Endpoint to delete user by id
+      tags:
+        - User
+      parameters:
+        - name: id
+          in: path
+          description: Parameter to find and delete user by id
+          required: true
+          schema:
+            type: number
+      responses:
+        "200":
+          description: Success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUpdateDeleteUserResponse'
+        "400":
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonError400'
+
+components:
+  schemas:
+    CreateProductRequest:
+      type: object
+      required:
+        - code
+        - name
+        - price
+      properties:
+        code:
+          type: string
+          example: "100001"
+        name:
+          type: string
+          example: "table"
+        price:
+          type: number
+          example: 10000
+    CreateUpdateDeleteProductResponse:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 10
+
+    CreateUserRequest:
+      type: object
+      required:
+        - email
+        - password
+        - full_name
+      properties:
+        email:
+          type: string
+          example: demo@hotmail.com
+        password:
+          type: string
+          example: "cBF'@`rg4mW6_aV<n)hCMG"
+        full_name:
+          type: string
+          example: "Pedro Roman"
+        activate:
+          type: number
+          example: 1
+    UpdateUserRequest:
+      type: object
+      required:
+        - full_name
+      properties:
+        password:
+          type: string
+          example: "cBF'@`rg4mW6_aV<n)hCMG"
+        full_name:
+          type: string
+          example: "Pedro Roman"
+        activate:
+          type: number
+          example: 1
+    GetUserResponse:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+        email:
+          type: string
+          example: pedro_marmol@gmail.com
+        full_name:
+          type: string
+          example: Pedro Marmol
+        activate:
+          type: number
+          example: 1
+          description: User status
+          enum:
+            - 0
+            - 1
+    CreateUpdateDeleteUserResponse:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 100
+
+    CommonError400:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          example: 400
+        error:
+          type: string
+          example: "ERROR_NAME"
+        message:
+          type: string
+          example: "Error message"
