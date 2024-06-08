@@ -9,10 +9,10 @@
     "build": "tsc",
     "test": "jest",
     "local": "cross-env nodemon app/index.ts",
-    "lint": "eslint {app/src,test}/**",
-    "lint:fix": "eslint --fix {app/src,test}/**",
-    "format": "prettier --check {app/src,test}/**",
-    "format:fix": "prettier --write {app/src,test}/**"
+    "lint": "eslint {app,test}/**",
+    "lint:fix": "eslint --fix {app,test}/**",
+    "format": "prettier --check {app,test}/**",
+    "format:fix": "prettier --write {app,test}/**"
   },
   "license": "ISC",
   "dependencies": {
@@ -45,6 +45,7 @@
     "nodemon": "^3.1.0",
     "prettier": "^3.3.0",
     "ts-jest": "^29.1.4",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "typescript": "5.1.6"
   }
 }
