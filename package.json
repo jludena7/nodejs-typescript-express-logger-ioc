@@ -9,10 +9,10 @@
     "build": "tsc",
     "test": "jest",
     "local": "cross-env nodemon app/index.ts",
-    "lint": "eslint {app,test}/**",
-    "lint:fix": "eslint --fix {app,test}/**",
-    "format": "prettier --check {app,test}/**",
-    "format:fix": "prettier --write {app,test}/**"
+    "lint": "eslint {app,tests}/**",
+    "lint:fix": "eslint --fix {app,tests}/**",
+    "format": "prettier --check {app,tests}/**",
+    "format:fix": "prettier --write {app,tests}/**"
   },
   "license": "ISC",
   "dependencies": {

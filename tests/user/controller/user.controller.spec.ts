@@ -27,7 +27,7 @@ describe("UserController", () => {
 			getById: jest.fn().mockResolvedValue({}),
 			all: jest.fn().mockResolvedValue([]),
 			delete: jest.fn().mockResolvedValue({ id: 1 }),
-		} as any;
+		} as jest.Mocked<UserService>;
 
 		userController = new UserController(userService);
 
@@ -40,7 +40,7 @@ describe("UserController", () => {
 			},
 			params: {},
 			query: {},
-		} as any as Request;
+		} as unknown as Request;
 
 		reqUpdate = {
 			body: {
@@ -51,30 +51,30 @@ describe("UserController", () => {
 			},
 			params: { id: "1" },
 			query: {},
-		} as any as Request;
+		} as unknown as Request;
 
 		reqGet = {
 			body: {},
 			params: { id: "1" },
 			query: {},
-		} as any as Request;
+		} as unknown as Request;
 
 		reqDelete = {
 			body: {},
 			params: { id: "1" },
 			query: {},
-		} as any as Request;
+		} as unknown as Request;
 
 		reqAll = {
 			body: {},
 			params: { id: "1" },
 			query: { before: "1", after: "10", limit: "10" },
-		} as any as Request;
+		} as unknown as Request;
 
 		res = {
 			status: jest.fn().mockReturnThis(),
 			json: jest.fn().mockReturnThis(),
-		} as any as Response;
+		} as unknown as Response;
 	});
 
 	afterEach(() => {

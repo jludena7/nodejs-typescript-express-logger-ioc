@@ -14,7 +14,7 @@
 		"forceConsistentCasingInFileNames": true
 	},
 	"include": [
-		"app/**/*.ts", "test/**/*.ts", "./jest.config.js"
+		"app/**/*.ts"
 	],
 	"exclude": ["node_modules"]
 }

@@ -18,10 +18,10 @@ module.exports = {
     transformIgnorePatterns: [
         '/node_modules/',
     ],
-    testRegex: "(/test/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    testRegex: "(/tests/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
     transform: {
         "^.+\\.(t|j)s$": "ts-jest",
     },
-    roots: ["<rootDir>/test"],
+    roots: ["<rootDir>/tests"],
     verbose: true,
 };
